@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Lingvo::VERSION
   spec.authors       = ["Igor G"]
   spec.email         = ["igor.s04@mail.ru"]
-  spec.description   = %q{test gem}
-  spec.summary       = %q{test gem}
-  spec.homepage      = ""
+  spec.description   = %q{Will help don't forget english words}
+  spec.summary       = %q{Lingvo - easy helper in learning english words}
+  spec.homepage      = 'https://github.com/igor04/lingvo'
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

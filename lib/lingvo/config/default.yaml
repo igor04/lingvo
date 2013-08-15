@@ -1,0 +1,23 @@
+notify:
+  timeout: 15000      # 15000ms show notifcatin
+  twmnc_bg: 'black'   # background for twmnc
+  twmnc_fg: 'orange'  # foreground for twmnc
+  image:              # default image (eng_flag), '' - without image or full path
+  first: 'eng'        # or 'ru'
+  prefix: ''          # start notification
+  separate: ' - '     # separate words
+  sufix: ''           # end notification
+
+gui:
+  image:                # default image (eng_flag), '' - without image or full path
+  image_size_x: 75
+  image_size_y: 100
+  bg: 'black'           # bg window color
+  margin: 10            # window margin
+  eng_fg: 'white'       # foreground words color
+  eng_size: 22          # word font size  in px
+  ru_fg: 'gray'
+  ru_size: 20
+  transcr: 'on'
+  transcr_fg: 'red'
+  transcr_size: 18

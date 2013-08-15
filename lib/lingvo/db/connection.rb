@@ -1,8 +1,14 @@
 require 'active_record'
 
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database  => "./lib/lingvo/db/production.sqlite3"
-)
+module Lingvo
+  module DB
+    module Connection
+      ActiveRecord::Base.establish_connection(
+        adapter: "sqlite3",
+        database: Config::DB_FILE
+      )
 
-ActiveRecord::Migrator.migrate "./lib/lingvo/db/migration/"
+      ActiveRecord::Migrator.migrate "#{Config::LINGVO_DIR}/db/migration/"
+    end
+  end
+end

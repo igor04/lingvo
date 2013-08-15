@@ -2,7 +2,7 @@ require 'nokogiri'
 
 module Lingvo
   module Parsers
-    class LingvoLeo
+    class Lingualeo
       attr_reader :words
 
       def initialize(path)
@@ -13,9 +13,9 @@ module Lingvo
 
           next if tds[0].nil?
           @words << {
-            eng: tds[1].content,
-            transcr: tds[2].content,
-            ru: tds[3].content,
+            eng: tds[1].content.strip,
+            transcr: tds[2].content.strip,
+            ru: tds[3].content.strip,
           }
         end
       end

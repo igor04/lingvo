@@ -2,39 +2,18 @@
 
 require 'lingvo'
 
-case ARGV[0]
-when '--parse'
-  path = ARGV[1]
+module Lingvo
+  module Console
+    case ARGV[0]
+    when '--parse' then Command.parse ARGV[1]
+    when '--rand' then Command.rand ARGV[1]
+    when '--size' then Command.size
+    when '--notify'then  Command.notify
+    when '--gui'then  Command.gui
+    when '-h' then Command.help
 
-  unless File.exists? path
-    $stdout << "File not found! (use: --parser <file_path>)\n"
-    exit
+    else
+      Command.help
+    end
   end
-
-  parser = Lingvo::Parsers::LingvoLeo.new path
-  Lingvo::Models::English.create parser.words
-
-
-when '--rand'
-  count = (ARGV[1] || 1).to_i
-
-  words = Lingvo::Models::English.rand count
-  words.each do |word|
-    $stdout << "#{word.eng} #{word.transcr} #{word.ru}\n"
-  end
-
-
-when '-h'
-  $stdout << """
-Lingvo #{Lingvo::VERSION}
-
-    --parse arg   - parse lingovleo HTML file with words
-    --rand count  - show 'n' random records\n\n"""
-
-when '--notify'
-  word = Lingvo::Models::English.rand(1).first
-  `twmnc -t '#{word.eng}' -c ' -  #{word.ru}' --bg '#000000' --fg 'orange' -i ~/.config/twmn/eng.png -d 10000`
-
-else
-  Lingvo::Simple.run
 end
