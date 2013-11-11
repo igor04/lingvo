@@ -10,26 +10,30 @@
 First you need parse some LinguaLeo word print page.
 
 Options:
+  >  `--parse file`  - parse lingvoleo HTML file with words
 
-  > `--parse file`  - parse lingovleo HTML file with words
+  >  `--rand count`  - show 'n' random records
 
-  > `--rand count`  - show 'n' random records
+  >  `--notify`      - show `word - translation` with your notification
 
-  > `--nitify`      - send show word - translation with your notification
+  >  `--gui`         - show words in simpe window
 
-  > `--gui`         - show words in simpe window
+  >                  key:  n - show next word
 
-  >                 key:  n - show next word
+  >                        q - close window
 
-  >                       q - close window
+  >  `--wc f1 [f2]`  - parse text file(f1), and write statistic to file(f2) or show if file(f2) isn't specify
 
-  > `--size`        - show words count
+  >  `--size`        - show words count
 
-  > `-h`            - show this help
+  >  `-v`            - show version
+
+  >  `-h`            - show this help
 
 Setup as cronjob:
 
 `*/5 * * * * lingvo --notify`
+
 `*/7 * * * * env DISPLAY=:0 lingvo --gui`
 
 ## Contributing

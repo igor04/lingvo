@@ -7,10 +7,12 @@ module Lingvo
     case ARGV[0]
     when '--parse' then Command.parse ARGV[1]
     when '--rand' then Command.rand ARGV[1]
+    when '--wc' then Command.words_counter ARGV[1], ARGV[2]
     when '--size' then Command.size
     when '--notify'then  Command.notify
     when '--gui'then  Command.gui
     when '-h' then Command.help
+    when '-v' then puts VERSION
 
     else
       Command.help

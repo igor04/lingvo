@@ -4,14 +4,17 @@ module Lingvo
 Lingvo #{VERSION}
 
 Options:
-  --parse file  - parse lingovleo HTML file with words
+  --parse file  - parse lingvoleo HTML file with words
   --rand count  - show 'n' random records
-  --nitify      - send show word - translation with your notification
+  --notify      - show `word - translation` with your notification
   --gui         - show words in simpe window
                   key:  n - show next word
                         q - close window
 
+  --wc f1 [f2]   - parse text file(f1), and write statistic to file(f2) or show if file(f2) isn't specify
+
   --size        - show words count
+  -v            - show version
   -h            - show this help
 
 """
@@ -45,6 +48,16 @@ Options:
             puts "File not found!"
             help
           end
+        end
+
+        def words_counter(from, to)
+          if !File.exists?(from) || (to && !File.exist?(to))
+            puts "File not found!"
+            help
+            return
+          end
+
+          Parsers::WordsCounter.new from, to
         end
 
         def rand(count)
