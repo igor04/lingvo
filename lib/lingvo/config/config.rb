@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'yaml'
 
+
 module Lingvo
   module Config
     class << self
@@ -15,6 +16,8 @@ module Lingvo
     BASE_DIR = File.join Dir.home, '.lingvo'
     DB_FILE = File.join BASE_DIR, 'english_words.sqlite3'
     CUSTOM_CONFIG = File.join BASE_DIR, 'config.yaml'
+
+    $stderr = File.open File.join(BASE_DIR + 'app.log'), 'w'
 
     unless File.exists? BASE_DIR
       FileUtils.mkdir BASE_DIR, mode: 0755

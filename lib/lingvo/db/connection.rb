@@ -8,6 +8,7 @@ module Lingvo
         database: Config::DB_FILE
       )
 
+      ActiveRecord::Migration.verbose = false
       ActiveRecord::Migrator.migrate "#{Config::LINGVO_DIR}/db/migration/"
     end
   end

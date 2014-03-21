@@ -6,6 +6,8 @@ module Lingvo
       validates :eng, :ru, presence: true, uniqueness: true
 
       scope :rand, -> (count) { order("RANDOM()").limit(count) }
+
+      after_save -> { print "·" }
     end
   end
 end

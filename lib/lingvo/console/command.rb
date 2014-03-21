@@ -40,37 +40,25 @@ Options:
     class Command
       class << self
         def parse(path)
-          if File.exists? path
-            parser = Parsers::Lingualeo.new path
-            Models::English.create parser.words
-            size
-          else
-            puts "File not found!"
-            help
-          end
+          return file_not_found unless File.exists? path
+          Parsers::Lingualeo.new(path) { |word| Models::English.create word }
+          size
         end
 
         def words_counter(from, to)
-          if !File.exists?(from) || (to && !File.exist?(to))
-            puts "File not found!"
-            help
-            return
-          end
-
+          return file_not_found if !File.exists?(from) || (to && !File.exist?(to))
           Parsers::WordsCounter.new from, to
         end
 
         def rand(count)
           count = (count || 1).to_i
-
-          words = Models::English.rand count
-          words.each do |word|
-            puts "#{word.eng} - #{word.transcr} - #{word.ru}"
+          Models::English.rand(count).each do |word|
+            printf "%-20s  %-20s  %s\n", word.eng, word.transcr, word.ru
           end
         end
 
         def size
-          puts "You have #{Models::English.count} words"
+          puts "\nYou have #{Models::English.count} words\n"
         end
 
         def notify
@@ -83,6 +71,12 @@ Options:
 
         def help
           puts HELP
+        end
+
+        private
+
+        def file_not_found
+          puts "\nFile not found!\n"
         end
       end
     end
