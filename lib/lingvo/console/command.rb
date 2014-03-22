@@ -11,11 +11,31 @@ Options:
                   key:  n - show next word
                         q - close window
 
-  --wc f1 [f2]   - parse text file(f1), and write statistic to file(f2) or show if file(f2) isn't specify
+  --wc f1 [f2]  - parse text file(f1), and write statistic to file(f2)
+                  or show in console if file(f2) isn't specify
 
   --size        - show words count
   -v            - show version
   -h            - show this help
+
+Description:
+
+  ○ Load words from lingualeo.ru and train with lingvo
+    · go to lingualeo site
+    · select words which you want
+    · go to print page and save it (like: print.html)
+
+    · $ lingvo --parse print.html
+    · Well Done!!! Now You have all words in lingvo ;)
+
+  ○ Parse document and build statistics
+    · save your text like english.txt file
+
+    · $ lingvo --wc english.txt
+    · show your statistic immediatly in console
+
+    · $ lingvo --wc english.txt statistics.txt
+    · open statistics.txt and see your words amount
 
 """
 
@@ -32,7 +52,7 @@ Options:
       end
 
       def no_word
-        puts "You don't have any words"
+        Command.words_not_found
         exit
       end
     end
@@ -46,19 +66,19 @@ Options:
         end
 
         def words_counter(from, to)
-          return file_not_found if !File.exists?(from) || (to && !File.exist?(to))
+          return file_not_found unless File.exists? from
           Parsers::WordsCounter.new from, to
         end
 
         def rand(count)
-          count = (count || 1).to_i
-          Models::English.rand(count).each do |word|
+          return words_not_found unless Models::English.any?
+          Models::English.rand((count || 1).to_i).each do |word|
             printf "%-20s  %-20s  %s\n", word.eng, word.transcr, word.ru
           end
         end
 
         def size
-          puts "\nYou have #{Models::English.count} words\n"
+          puts "\nYou have #{Models::English.count} words"
         end
 
         def notify
@@ -73,10 +93,16 @@ Options:
           puts HELP
         end
 
-        private
+        def version
+          puts "\n#{VERSION}"
+        end
 
         def file_not_found
-          puts "\nFile not found!\n"
+          puts "\nFile not found!"
+        end
+
+        def words_not_found
+          puts "\nYou don't have any words"
         end
       end
     end

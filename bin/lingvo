@@ -12,7 +12,7 @@ module Lingvo
     when '--notify'then  Command.notify
     when '--gui'then  Command.gui
     when '-h' then Command.help
-    when '-v' then puts VERSION
+    when '-v' then Command.version
 
     else
       Command.help

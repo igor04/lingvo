@@ -18,7 +18,7 @@ module Lingvo
       end
 
       def show
-        count.each { |data| puts "#{data[1]} : #{data[0]}" }
+        count.each { |data| printf "%-4s - %-20s\n", data[1], data[0] }
       end
 
       def read from

@@ -17,8 +17,6 @@ module Lingvo
     DB_FILE = File.join BASE_DIR, 'english_words.sqlite3'
     CUSTOM_CONFIG = File.join BASE_DIR, 'config.yaml'
 
-    $stderr = File.open File.join(BASE_DIR + 'app.log'), 'w'
-
     unless File.exists? BASE_DIR
       FileUtils.mkdir BASE_DIR, mode: 0755
     end
@@ -32,6 +30,8 @@ module Lingvo
       FileUtils.cp DEFAULT_CONFIG, CUSTOM_CONFIG
       FileUtils.chmod 0755, CUSTOM_CONFIG
     end
+
+    $stderr = File.open File.join(BASE_DIR, 'app.log'), 'w'
 
     default_config = YAML.load_file DEFAULT_CONFIG
     custom_config = YAML.load_file CUSTOM_CONFIG
